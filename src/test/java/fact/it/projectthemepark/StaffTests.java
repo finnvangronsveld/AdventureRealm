@@ -14,29 +14,29 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class StaffTests {
 
     /**
-     * Test of constructor en getters
+     * Test of constructor and getters
      */
     @Test
     public void testConstructorEnGetters() {
-        Staff employee = new Staff("Juul", "Kabas");
+        Staff employee = new Staff("Juul", "Kabas", false);
         assertEquals("Juul", employee.getFirstName());
         assertEquals("Kabas", employee.getSurName());
         assertFalse(employee.isStudent());
         assertEquals(LocalDate.now(), employee.getStartDate());
     }
 
-
     /**
      * Test1 of toString method, of class Staff.
      */
     @Test
     public void testToString() {
-        Staff donald = new Staff("Donald", "Duck");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        assertEquals("Staff member DUCK Donald is employed since " + LocalDate.now().format(dtf) , donald.toString());
-        Staff minnie = new Staff("Minnie", "Mouse");
-        minnie.setStudent(true);
-        assertEquals("Staff member MOUSE Minnie (working student) is employed since " + LocalDate.now().format(dtf) , minnie.toString());
+
+        Staff donald = new Staff("Donald", "Duck", false);
+        assertEquals("Staff member DUCK Donald is employed since " + LocalDate.now().format(dtf), donald.toString());
+
+        Staff minnie = new Staff("Minnie", "Mouse", true);
+        assertEquals("Staff member MOUSE Minnie (working student) is employed since " + LocalDate.now().format(dtf), minnie.toString());
     }
 
     /**
@@ -44,10 +44,11 @@ public class StaffTests {
      */
     @Test
     public void testToString2() {
-        Staff donald = new Staff("Donald", "Duck");
-        donald.setStartDate(LocalDate.of(1999,2,25));
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        assertEquals("Staff member DUCK Donald is employed since " + donald.getStartDate().format(dtf) , donald.toString());
-    }
+        // Removed setStartDate since it's not allowed by the assignment
+        // We'll just verify toString still works properly
 
+        Staff donald = new Staff("Donald", "Duck", false);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        assertEquals("Staff member DUCK Donald is employed since " + donald.getStartDate().format(dtf), donald.toString());
+    }
 }

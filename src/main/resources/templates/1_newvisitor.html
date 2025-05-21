@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Visitor</title>
+</head>
+<body>
+<h2>Register New Visitor</h2>
+<form th:action="@{/create-visitor}" method="post">
+    First name: <input type="text" name="firstName" required><br>
+    Surname: <input type="text" name="surName" required><br>
+    Year of birth: <input type="number" name="yearOfBirth" required><br><br>
+
+    <!-- In Part 3, we’ll add radio buttons for theme parks here -->
+
+    <button type="submit">Continue without theme park code</button>
+</form>
+
+<br>
+<a href="/">Back to Home</a>
+</body>
+</html>

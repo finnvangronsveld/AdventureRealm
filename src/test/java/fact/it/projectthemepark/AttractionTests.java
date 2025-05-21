@@ -11,17 +11,24 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class AttractionTests {
 
     /**
-     * Test of constructor en getters
+     * Test of constructor and getters
      */
     @Test
     public void testConstructorEnGetters() {
-        Attraction attraction = new Attraction("Tower");
+        Staff dummy = new Staff("Test", "User", false);
+
+        Attraction attraction = new Attraction("Tower", "tower.jpg", dummy);
         assertEquals("Tower", attraction.getName());
-        Attraction attraction1 = new Attraction();
-        assertNull(attraction1.getName());
-        Attraction attraction2 = new Attraction("Jump", 540);
+
+        // Removed invalid no-arg constructor test
+        // Replaced with valid minimal constructor call
+        Attraction attraction1 = new Attraction("", "", dummy);
+        assertEquals("", attraction1.getName());
+
+        // Removed int duration constructor
+        Attraction attraction2 = new Attraction("Jump", "jump.jpg", dummy);
         assertEquals("Jump", attraction2.getName());
-        assertEquals(540, attraction2.getDuration());
+        assertEquals("jump.jpg", attraction2.getPhoto());
     }
 
     /**
@@ -29,28 +36,19 @@ public class AttractionTests {
      */
     @Test
     public void testSetName() {
-        Attraction attraction = new Attraction();
+        Staff dummy = new Staff("Test", "User", false);
+        Attraction attraction = new Attraction("Old", "photo.jpg", dummy);
         attraction.setName("Tower");
         assertEquals("Tower", attraction.getName());
     }
-
-    /**
-     * Test of setDuration, of class Attraction.
-     */
-    @Test
-    public void testSetDuration() {
-        Attraction attraction = new Attraction("Tower");
-        attraction.setDuration(180);
-        assertEquals(180, attraction.getDuration());
-    }
-
 
     /**
      * Test of setPhoto method, of class Attraction.
      */
     @Test
     public void testSetPhoto() {
-        Attraction attraction = new Attraction("Tower");
+        Staff dummy = new Staff("Test", "User", false);
+        Attraction attraction = new Attraction("Tower", "oldphoto.jpg", dummy);
         attraction.setPhoto("testphoto.jpg");
         assertEquals("testphoto.jpg", attraction.getPhoto());
     }
@@ -60,9 +58,8 @@ public class AttractionTests {
      */
     @Test
     public void testResponsible() {
-        Attraction attraction = new Attraction("Tower");
-        Staff Mickey = new Staff("Mickey", "Mouse");
-        attraction.setResponsible(Mickey);
+        Staff Mickey = new Staff("Mickey", "Mouse", false);
+        Attraction attraction = new Attraction("Tower", "tower.jpg", Mickey);
         assertEquals(Mickey, attraction.getResponsible());
     }
 }

@@ -15,11 +15,11 @@ public class VisitorTests {
     @Test
     public void testConstructorEnGetters() {
 
-        Visitor visitor = new Visitor("Donald", "Duck");
+        Visitor visitor = new Visitor("Donald", "Duck", 1999);
         assertEquals("Donald", visitor.getFirstName());
         assertEquals("Duck", visitor.getSurName());
         assertEquals("undefined", visitor.getThemeParkCode());
-        assertEquals(0, visitor.getYearOfBirth());
+        assertEquals(1999, visitor.getYearOfBirth());
     }
 
     /**
@@ -27,7 +27,7 @@ public class VisitorTests {
      */
     @Test
     public void testSetFirstName() {
-        Visitor visitor = new Visitor("Donald", "Duck");
+        Visitor visitor = new Visitor("Donald", "Duck", 1999);
         visitor.setFirstName("Mickey");
         assertEquals("Mickey", visitor.getFirstName());
     }
@@ -37,7 +37,7 @@ public class VisitorTests {
      */
     @Test
     public void testSetSurName() {
-        Visitor visitor = new Visitor("Donald", "Duck");
+        Visitor visitor = new Visitor("Donald", "Duck", 1999);
         visitor.setSurName("Mouse");
         assertEquals("Mouse", visitor.getSurName());
     }
@@ -47,7 +47,7 @@ public class VisitorTests {
      */
     @Test
     public void testSetThemeParkCode() {
-        Visitor visitor = new Visitor("Donald", "Duck");
+        Visitor visitor = new Visitor("Donald", "Duck", 1999);
         visitor.setThemeParkCode("undefined");
         assertEquals("undefined", visitor.getThemeParkCode());
     }
@@ -57,7 +57,7 @@ public class VisitorTests {
      */
     @Test
     public void testSetYearOfBirth() {
-        Visitor visitor = new Visitor("Donald", "Duck");
+        Visitor visitor = new Visitor("Donald", "Duck", 1999);
         visitor.setYearOfBirth(2015);
         assertEquals(2015, visitor.getYearOfBirth());
     }
@@ -68,10 +68,10 @@ public class VisitorTests {
      */
     @Test
     public void testWishListBasics() {
-        Visitor visitor = new Visitor("Donald", "Duck");
-        assertEquals(0, visitor.getNumberOfWishes());
+        Visitor visitor = new Visitor("Donald", "Duck", 1999);
+        assertEquals(0, visitor.getWishList().size());
         assertTrue(visitor.addToWishList("HolaHola"));
-        assertEquals(1, visitor.getNumberOfWishes());
+        assertEquals(1, visitor.getWishList().size());
     }
 
     /**
@@ -79,20 +79,20 @@ public class VisitorTests {
      */
     @Test
     public void testWishListMax5() {
-        Visitor visitor = new Visitor("Donald", "Duck");
-        assertEquals(0, visitor.getNumberOfWishes());
+        Visitor visitor = new Visitor("Donald", "Duck", 1999);
+        assertEquals(0, visitor.getWishList().size());
         assertTrue(visitor.addToWishList("HolaHola"));
-        assertEquals(1, visitor.getNumberOfWishes());
+        assertEquals(1, visitor.getWishList().size());
         assertTrue(visitor.addToWishList("HelaHela"));
-        assertEquals(2, visitor.getNumberOfWishes());
+        assertEquals(2, visitor.getWishList().size());
         assertTrue(visitor.addToWishList("Hihi"));
-        assertEquals(3, visitor.getNumberOfWishes());
+        assertEquals(3, visitor.getWishList().size());
         assertTrue(visitor.addToWishList("Hahah"));
-        assertEquals(4, visitor.getNumberOfWishes());
+        assertEquals(4, visitor.getWishList().size());
         assertTrue(visitor.addToWishList("Howhow"));
-        assertEquals(5, visitor.getNumberOfWishes());
+        assertEquals(5, visitor.getWishList().size());
         assertFalse(visitor.addToWishList("Hahahah"));
-        assertEquals(5, visitor.getNumberOfWishes());
+        assertEquals(5, visitor.getWishList().size());
     }
 
     /**
@@ -100,9 +100,9 @@ public class VisitorTests {
      */
     @Test
     public void testToString() {
-        Visitor donald = new Visitor("Donald", "Duck");
-        donald.setThemeParkCode("undefined");
-        assertEquals("Visitor DUCK Donald with theme park code undefined", donald.toString());
+        Visitor visitor = new Visitor("Donald", "Duck", 1999);
+        visitor.setThemeParkCode("undefined");
+        assertEquals("Visitor DUCK Donald with theme park code undefined", visitor.toString());
     }
 
 }
