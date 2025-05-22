@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>AdventureRealm</title>
-    <link rel="stylesheet" type="text/css" href="img/style.css" />
+    <title>ThemePark Manager</title>
+    <link rel="stylesheet" type="text/css" href="/img/style.css"/>
+    <!--    Finn Vangronsveld-->
+    <!--    r1043273-->
 </head>
 <body>
-<h1>Welcome to AdventureRealm</h1>
-<p>Created by Finn Vangronsveld (r1043273)</p>
+<img src="/img/logo.png" alt="ThemePark Manager logo" class="logo">
+<h1>Welcome to ThemePark Manager</h1>
+<p>Manage your parks, staff, and attractions in one place.</p>
+
 
 <ul>
     <li><a href="/new-visitor">New visitor</a></li>
     <li><a href="/new-staff">New staff member</a></li>
+    <li><a href="/all-visitors">List of visitors</a></li>
+    <li><a href="/all-staff">List of staff</a></li>
+    <li><a href="/new-themepark">New theme park</a></li>
+    <li><a href="/themeparks">List of theme parks</a></li>
+    <li><a href="/new-attraction">New attraction</a></li>
 </ul>
+<form th:action="@{/search-attraction}" method="get">
+    <label for="search">Search attraction by name:</label>
+    <input type="text" name="search" required/>
+    <button type="submit">Search</button>
+</form>
 </body>
 </html>

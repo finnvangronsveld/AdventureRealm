@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Theme Park</title>
+    <link rel="stylesheet" type="text/css" href="/img/style.css"/>
+    <!--    Finn Vangronsveld-->
+    <!--    r1043273-->
+</head>
+<body>
+<h2>Add a New Theme Park</h2>
+<form th:action="@{/create-themepark}" method="post">
+    Theme park name: <input type="text" name="name" required><br><br>
+    <button type="submit">Create Theme Park</button>
+</form>
+<br>
+<a href="/">Back to home</a>
+</body>
+</html>

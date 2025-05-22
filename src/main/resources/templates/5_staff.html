@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Visitor Details</title>
+    <title>All Staff Members</title>
     <link rel="stylesheet" type="text/css" href="/img/style.css"/>
     <!--    Finn Vangronsveld-->
     <!--    r1043273-->
 </head>
 <body>
-<h2>Welcome!</h2>
-<p th:text="${visitorInfo}"></p>
+<h2>All Staff Members</h2>
+
+<ul>
+    <li th:each="staff : ${staffList}" th:text="${staff.toString()}"></li>
+</ul>
+
 <br>
-<a href="/">Back to Home</a>
+<a href="/">Back to home</a>
 </body>
 </html>

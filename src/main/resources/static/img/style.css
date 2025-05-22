@@ -1,1 +1,98 @@
-/*add a self-selected stylesheet here*/
+/**
+ * Finn Vangronsveld
+ * r1043273
+ */
+
+body {
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 30px;
+    color: #333;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+img.logo {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+form {
+    margin: 0 auto 30px;
+    background-color: #ffffff;
+    padding: 20px;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+input, select, button {
+    padding: 10px;
+    margin: 8px 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+li {
+    list-style: none;
+    background-color: white;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}

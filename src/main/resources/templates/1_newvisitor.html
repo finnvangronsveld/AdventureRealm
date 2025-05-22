@@ -2,17 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>New Visitor</title>
+    <link rel="stylesheet" type="text/css" href="/img/style.css"/>
+    <!--    Finn Vangronsveld-->
+    <!--    r1043273-->
 </head>
 <body>
 <h2>Register New Visitor</h2>
+
 <form th:action="@{/create-visitor}" method="post">
     First name: <input type="text" name="firstName" required><br>
     Surname: <input type="text" name="surName" required><br>
     Year of birth: <input type="number" name="yearOfBirth" required><br><br>
 
-    <!-- In Part 3, we’ll add radio buttons for theme parks here -->
+    <p>Select a theme park:</p>
+    <ul th:each="park, iterStat : ${themeParks}">
+        <li>
+            <input type="radio" name="parkIndex"
+                   th:value="${iterStat.index}"
+                   th:checked="${iterStat.index == 0}"/>
+            <span th:text="${park.name}"></span>
+        </li>
+    </ul>
 
-    <button type="submit">Continue without theme park code</button>
+    <br>
+    <button type="submit">Register Visitor</button>
 </form>
 
 <br>

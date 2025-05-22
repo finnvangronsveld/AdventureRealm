@@ -1,3 +1,8 @@
+/**
+ * Finn Vangronsveld
+ * r1043273
+ */
+
 package fact.it.projectthemepark.controller;
 
 import fact.it.projectthemepark.model.*;
@@ -30,20 +35,114 @@ public class MainController {
     }
 
     @GetMapping("/new-visitor")
-    public String showNewVisitorForm() {
+    public String showNewVisitorForm(Model model) {
+        model.addAttribute("themeParks", themeParkArrayList);
         return "1_newvisitor";
     }
+
 
     @PostMapping("/create-visitor")
     public String createVisitor(@RequestParam String firstName,
                                 @RequestParam String surName,
                                 @RequestParam int yearOfBirth,
+                                @RequestParam int parkIndex,
                                 Model model) {
+
         Visitor visitor = new Visitor(firstName, surName, yearOfBirth);
-        this.latestVisitor = visitor;
+        ThemePark selectedPark = themeParkArrayList.get(parkIndex);
+        selectedPark.registerVisitor(visitor);
+        visitorArrayList.add(visitor);
 
         model.addAttribute("visitorInfo", visitor.toString());
         return "2_visitordetails";
+    }
+
+    @GetMapping("/new-staff")
+    public String showNewStaffForm() {
+        return "3_newstaff";
+    }
+
+    @PostMapping("/create-staff")
+    public String createStaff(@RequestParam String firstName,
+                              @RequestParam String surName,
+                              @RequestParam(required = false) boolean isStudent,
+                              Model model) {
+        Staff staff = new Staff(firstName, surName, isStudent);
+        staffArrayList.add(staff);
+        model.addAttribute("staffInfo", staff.toString());
+        return "4_staffdetails";
+    }
+
+    @GetMapping("/all-staff")
+    public String showAllStaff(Model model) {
+        model.addAttribute("staffList", staffArrayList);
+        return "5_staff";
+    }
+
+    @GetMapping("/all-visitors")
+    public String showAllVisitors(Model model) {
+        model.addAttribute("visitorList", visitorArrayList);
+        return "6_visitors";
+    }
+
+    @GetMapping("/new-themepark")
+    public String showNewThemeParkForm() {
+        return "7_newthemepark";
+    }
+
+    @PostMapping("/create-themepark")
+    public String createThemePark(@RequestParam String name) {
+        themeParkArrayList.add(new ThemePark(name));
+        return "redirect:/themeparks";
+    }
+
+    @GetMapping("/themeparks")
+    public String showThemeParks(Model model) {
+        model.addAttribute("parks", themeParkArrayList);
+        return "8_themeparks";
+    }
+
+    @GetMapping("/new-attraction")
+    public String showNewAttractionForm(Model model) {
+        model.addAttribute("parks", themeParkArrayList);
+        model.addAttribute("staff", staffArrayList);
+        return "9_newattraction";
+    }
+
+    @PostMapping("/create-attraction")
+    public String createAttraction(@RequestParam String name,
+                                   @RequestParam String photo,
+                                   @RequestParam int parkIndex,
+                                   @RequestParam int staffIndex,
+                                   Model model) {
+
+        if (parkIndex < 0 || parkIndex >= themeParkArrayList.size() ||
+                staffIndex < 0 || staffIndex >= staffArrayList.size()) {
+            model.addAttribute("errorMessage", "Invalid theme park or staff selection.");
+            return "error";
+        }
+
+        ThemePark selectedPark = themeParkArrayList.get(parkIndex);
+        Staff responsible = staffArrayList.get(staffIndex);
+        Attraction newAttraction = new Attraction(name, photo, responsible);
+        selectedPark.addAttraction(newAttraction);
+
+        model.addAttribute("selectedPark", selectedPark);
+        return "10_showattractions";
+    }
+
+    @GetMapping("/search-attraction")
+    public String searchAttraction(@RequestParam String search, Model model) {
+        for (ThemePark park : themeParkArrayList) {
+            Attraction found = park.searchAttractionByName(search);
+            if (found != null) {
+                model.addAttribute("attraction", found);
+                model.addAttribute("parkName", park.getName());
+                return "11_attractiondetails";
+            }
+        }
+        model.addAttribute("errorMessage", "Attraction '" + search + "' not found.");
+        return "error";
     }
 
     private ArrayList<Staff> fillStaffMembers() {
@@ -84,7 +183,6 @@ public class MainController {
     private ArrayList<ThemePark> fillThemeParks() {
         ArrayList<ThemePark> list = new ArrayList<>();
 
-        // Reuse staff list by index
         Staff s1 = staffArrayList.get(0);
         Staff s2 = staffArrayList.get(1);
         Staff s3 = staffArrayList.get(2);
@@ -95,12 +193,10 @@ public class MainController {
         Staff s8 = staffArrayList.get(7);
         Staff s9 = staffArrayList.get(8);
 
-        // Theme Parks
         ThemePark tp1 = new ThemePark("Plopsaland");
         ThemePark tp2 = new ThemePark("Walibi Belgium");
         ThemePark tp3 = new ThemePark("Holiday Park");
 
-        // Attractions
         tp1.addAttraction(new Attraction("Anubis the Ride", "/img/anubis the ride.jpg", s1));
         tp1.addAttraction(new Attraction("The big wave", "/img/the big wave.jpg", s2));
         tp1.addAttraction(new Attraction("Pirate boat", "/img/pirate boat.jpg", s3));

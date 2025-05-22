@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Visitor Details</title>
+    <title>List of Theme Parks</title>
     <link rel="stylesheet" type="text/css" href="/img/style.css"/>
     <!--    Finn Vangronsveld-->
     <!--    r1043273-->
 </head>
 <body>
-<h2>Welcome!</h2>
-<p th:text="${visitorInfo}"></p>
+<h2>List of All Theme Parks</h2>
+<ul>
+    <li th:each="park : ${parks}" th:text="${park.name}"></li>
+</ul>
 <br>
-<a href="/">Back to Home</a>
+<a href="/">Back to home</a>
 </body>
 </html>

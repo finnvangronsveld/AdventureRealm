@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Visitors</title>
+    <link rel="stylesheet" type="text/css" href="/img/style.css"/>
+    <!--    Finn Vangronsveld-->
+    <!--    r1043273-->
+</head>
+<body>
+<h2>All Visitors</h2>
+
+<ul th:each="visitor : ${visitorList}">
+    <li>
+        <p th:text="${visitor.toString()}"></p>
+        <p>Year of birth: <span th:text="${visitor.yearOfBirth}"></span></p>
+        <p>Wish List:</p>
+        <ul>
+            <li th:each="wish : ${visitor.wishList}" th:text="${wish}"></li>
+        </ul>
+    </li>
+</ul>
+
+<br>
+<a href="/">Back to home</a>
+</body>
+</html>

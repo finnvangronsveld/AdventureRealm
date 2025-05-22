@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Attractions in Park</title>
+    <link rel="stylesheet" type="text/css" href="/img/style.css"/>
+    <!--    Finn Vangronsveld-->
+    <!--    r1043273-->
+</head>
+<body>
+<h2 th:text="'Attractions in ' + ${selectedPark.name}"></h2>
+
+<ul th:each="attraction : ${selectedPark.attractions}">
+    <li>
+        <p th:text="${attraction.name}"></p>
+        <p th:text="'Responsible: ' + ${attraction.responsible.toString()}"></p>
+        <img th:src="@{${attraction.photo}}"
+             onerror="this.src='/img/noimage.jpg'"
+             width="200"/>
+    </li>
+</ul>
+
+<br>
+<a href="/">Back to home</a>
+</body>
+</html>

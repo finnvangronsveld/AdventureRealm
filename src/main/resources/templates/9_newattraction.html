@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Attraction</title>
+    <link rel="stylesheet" type="text/css" href="/img/style.css"/>
+    <!--    Finn Vangronsveld-->
+    <!--    r1043273-->
+</head>
+<body>
+<h2>Add New Attraction</h2>
+
+<form th:action="@{/create-attraction}" method="post">
+    Name: <input type="text" name="name" required><br>
+    Photo filename (with path, e.g. /img/photo.jpg): <input type="text" name="photo"><br><br>
+
+    Theme park:
+    <select name="parkIndex">
+        <option th:each="park, iterStat : ${parks}"
+                th:value="${iterStat.index}"
+                th:text="${park.name}"></option>
+    </select>
+    <br><br>
+
+    Responsible staff:
+    <select name="staffIndex">
+        <option th:each="s, iterStat : ${staff}"
+                th:value="${iterStat.index}"
+                th:text="${s.toString()}"></option>
+    </select>
+    <br><br>
+
+    <button type="submit">Confirm attraction</button>
+</form>
+
+<br>
+<a href="/">Back to home</a>
+</body>
+</html>

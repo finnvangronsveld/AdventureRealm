@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Staff Member</title>
+    <link rel="stylesheet" type="text/css" href="/img/style.css"/>
+    <!--    Finn Vangronsveld-->
+    <!--    r1043273-->
+</head>
+<body>
+<h2>Register New Staff Member</h2>
+
+<form th:action="@{/create-staff}" method="post">
+    First name: <input type="text" name="firstName" required><br>
+    Surname: <input type="text" name="surName" required><br>
+    Working student: <input type="checkbox" name="isStudent"><br>
+    <button type="submit">Add staff member</button>
+</form>
+
+<br>
+<a href="/">Back to home</a>
+</body>
+</html>
